@@ -51,6 +51,10 @@ function bullet_collision()
             player1.bullets.splice(i, 1);
             i--;
         }
+
+        if ((Math.abs(player1.bullets[i].position.x) > enemy1.position.x + 10 && Math.abs(player1.bullets[i].position.x) < enemy1.position.x - 10 (Math.abs(player1.bullets[i].position.x) > enemy1.position.x + 10 && Math.abs(player1.bullets[i].position.x) < enemy1.position.x - 10
+            Math.abs(player1.bullets[i].position.y) >= HEIGHT / 2)
+
     }
 
 }
@@ -63,10 +67,24 @@ function player_collision()
 
     if ( x > WIDTH )
         player1.graphic.position.x -= x - WIDTH;
+    if ( x < 0 )
+        player1.graphic.position.x -= x;
     if ( y < 0 )
         player1.graphic.position.y -= y;
     if ( y > HEIGHT )
         player1.graphic.position.y -= y - HEIGHT;
+
+    var x = enemy1.graphic.position.x + WIDTH / 2;
+    var y = enemy1.graphic.position.y + HEIGHT / 2;
+
+    if ( x > WIDTH )
+        enemy1.graphic.position.x -= x - WIDTH;
+    if ( x < 0 )
+        enemy1.graphic.position.x -= x;
+    if ( y < 0 )
+        enemy1.graphic.position.y -= y;
+    if ( y > HEIGHT )
+        enemy1.graphic.position.y -= y - HEIGHT;
 
 }
 
@@ -81,7 +99,12 @@ function player_falling()
     var element = null;
 
     for (var i = 0; i < length; i++) {
+
         element = noGround[i];
+
+        if(!element) {
+            continue;
+        }
 
         var tileX = (element[0]) | 0;
         var tileY = (element[1]) | 0;
